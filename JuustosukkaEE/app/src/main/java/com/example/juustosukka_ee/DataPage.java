@@ -1,14 +1,14 @@
 package com.example.juustosukka_ee;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class NewUser extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class DataPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_newuser);
+        setContentView(R.layout.activity_datapage);
     }
 }
