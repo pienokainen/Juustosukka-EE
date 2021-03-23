@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Aktiviteetti1 extends AppCompatActivity {
+public class NewUser extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aktiviteetti1);
+        setContentView(R.layout.activity_newuser);
     }
 }

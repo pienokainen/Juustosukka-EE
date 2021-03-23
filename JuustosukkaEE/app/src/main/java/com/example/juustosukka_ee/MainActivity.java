@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAktiviteetti1();
+                openNewUser();
             }
         });
     }
 
-    public void openAktiviteetti1(){
-        Intent intent = new Intent(this, Aktiviteetti1.class);
+    public void openNewUser(){
+        Intent intent = new Intent(this, NewUser.class);
         startActivity(intent);
     }
 
