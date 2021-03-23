@@ -26,7 +26,7 @@ public class LogInPage extends AppCompatActivity {
     }
 
     public void openNewUser(){
-        Intent intent = new Intent(this, NewUser.class);
+        Intent intent = new Intent(this, NewUserPage.class);
         startActivity(intent);
     }
 
