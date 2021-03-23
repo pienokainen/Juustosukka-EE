@@ -1,8 +1,8 @@
 package com.example.juustosukka_ee;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 
 public class DataPage extends AppCompatActivity {
 
