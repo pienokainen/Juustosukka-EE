@@ -9,42 +9,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:text="HomePage"
-        android:id="@+id/hometext" />
+        android:text="Home"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        />
 
-    <ImageButton
-        android:id="@+id/profilebutton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/hometext"
-        android:background="@drawable/profile_icon" />
-
-    <ImageButton
-        android:id="@+id/homebutton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="199dp"
-        android:layout_marginBottom="225dp"
-        android:background="@drawable/home_icon" />
-
-    <ImageButton
-        android:id="@+id/databutton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="199dp"
-        android:layout_marginBottom="225dp"
-        android:background="@drawable/search_icon" />
+        app:itemBackground="@color/teal_700"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation" />
 
 </RelativeLayout>

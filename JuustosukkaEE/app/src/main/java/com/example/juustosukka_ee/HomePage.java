@@ -1,61 +1,44 @@
 package com.example.juustosukka_ee;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class HomePage extends AppCompatActivity {
-    private ImageButton databutton;
-    private ImageButton homebutton;
-    private ImageButton profilebutton;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-        databutton = (ImageButton) findViewById(R.id.databutton);
-        databutton.setOnClickListener(new View.OnClickListener() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
+
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                openDataPage();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        return true;
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(), ProfilePage.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.data:
+                        startActivity(new Intent(getApplicationContext(), DataPage.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
             }
         });
-
-        homebutton = (ImageButton) findViewById(R.id.homebutton);
-        homebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openHomePage();
-            }
-        });
-
-        profilebutton = (ImageButton) findViewById(R.id.profilebutton);
-        profilebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProfilePage();
-            }
-        });
     }
-
-    public void openProfilePage(){
-        Intent intent1 = new Intent(this, ProfilePage.class);
-        startActivity(intent1);
-    }
-
-    public void openDataPage(){
-        Intent intent2 = new Intent(this, DataPage.class);
-        startActivity(intent2);
-    }
-
-    public void openHomePage(){
-        Intent intent3 = new Intent(this, HomePage.class);
-        startActivity(intent3);
-    }
-
 }
