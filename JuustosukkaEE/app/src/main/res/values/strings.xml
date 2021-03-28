@@ -2,6 +2,7 @@
     <string name="app_name">Juustosukka-EE</string>
     <string name="app_logo">app_logo</string>
     <string name="new_user">Luo uusi käyttäjä</string>
+    <string name="log_in">Kirjaudu sisään</string>
     <string name="back_icon">back_icon</string>
     <string name="password_hint">Salasana</string>
     <string name="useraname_hint">Käyttäjänimi</string>

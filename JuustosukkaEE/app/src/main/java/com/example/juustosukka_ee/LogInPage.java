@@ -15,20 +15,25 @@ public class LogInPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginpage);
-        button = (Button) findViewById(R.id.Button);
+        button = (Button) findViewById(R.id.logIn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewUser();
+                logIn();
             }
         });
     }
 
-    public void openNewUser(){
-        Intent intent = new Intent(this, NewUserPage.class);
+    public void logIn(){
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
+    public void openNewUser(View v){
+        Intent intent = new Intent(this, NewUserPage.class);
+        startActivity(intent);
+        
+    }
         // Moi tästä alkaa meiän projekti!!
 
         // JEE
