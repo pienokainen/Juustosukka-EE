@@ -15,17 +15,42 @@
         android:layout_width="wrap_content"
         android:layout_height="197dp"
         android:layout_marginStart="36.5dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="36.5dp"
         android:contentDescription="@string/app_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136"
         app:srcCompat="@drawable/teerveys_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
+        android:id="@+id/textInputLayout4"
+        android:layout_width="308dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@color/yellow_200"
+        android:backgroundTint="@color/yellow_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.676">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwd"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:backgroundTint="@color/yellow_200"
+            android:gravity="center_horizontal"
+            android:hint="@string/password_hint"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="73dp"
+            tools:layout_editor_absoluteY="577dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="308dp"
         android:layout_height="66dp"
         android:layout_marginStart="50dp"
@@ -33,6 +58,7 @@
         android:layout_marginEnd="50dp"
         android:background="@color/yellow_700"
         android:backgroundTint="@color/yellow_700"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView1"
@@ -48,45 +74,20 @@
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="308dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:background="@color/yellow_200"
-        android:backgroundTint="@color/yellow_200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
-        tools:ignore="NotSibling">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwd"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:backgroundTint="@color/yellow_200"
-            android:gravity="center_horizontal"
-            android:hint="@string/password_hint"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="73dp"
-            tools:layout_editor_absoluteY="577dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/logIn"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="161dp"
         android:layout_height="53dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="156dp"
         android:onClick="logIn"
         android:text="@string/log_in"
         app:backgroundTint="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@id/passwd"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="NotSibling" />
 
     <TextView
@@ -105,16 +106,19 @@
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="130dp"
+        android:layout_marginBottom="100dp"
         android:onClick="openNewUser"
-        android:text="@string/new_user_underline"
-        android:textColor="#003AE6"
+        android:text="Luo uusi käyttäjä"
+        android:textColor="#2D2F31"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logIn" />
+        app:layout_constraintTop_toBottomOf="@+id/logIn"
+        app:layout_constraintVertical_bias="0.25" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

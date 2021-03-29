@@ -16,9 +16,15 @@ public class LogInPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginpage);
         button = (Button) findViewById(R.id.logIn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logIn();
+            }
+        });
     }
 
-    public void logIn(View v){
+    public void logIn(){
         Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
