@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2D2F31"
-    android:backgroundTint="@color/yellow_200"
+    android:backgroundTint="@color/background_color"
     tools:context=".ProfilePage">
 
     <EditText
