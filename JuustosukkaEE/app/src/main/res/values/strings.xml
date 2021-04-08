@@ -9,4 +9,11 @@
     <string name="useraname_hint">Käyttäjänimi</string>
     <string name="password_again_hint">Salasana uudestaan</string>
     <string name="create_account">Luo tili</string>
+    <string name="username_pp">Käyttäjänimi</string>
+    <string name="password_pp">Salasana</string>
+    <string name="steps">Askeleita kävelty</string>
+    <string name="start_weight">Aloituspaino</string>
+    <string name="height">Pituus</string>
+    <string name="log_out">Kirjaudu Ulos</string>
+    <string name="profilepic"></string>
 </resources>

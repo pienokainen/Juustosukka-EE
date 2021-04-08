@@ -3,6 +3,8 @@ package com.example.juustosukka_ee;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class ProfilePage extends AppCompatActivity {
     TextView textField;
     EditText editText;
+    Button log_out;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +26,12 @@ public class ProfilePage extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
-        EditText editWeight = findViewById(R.id.start_weight);
+        log_out = (Button) findViewById(R.id.logout_button);
+
+        /*EditText editWeight = findViewById(R.id.start_weight);
         EditText editHeight = findViewById(R.id.height);
 
+        TextView editWeight = findViewById(R.id.height);*/
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -45,6 +51,13 @@ public class ProfilePage extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+
+    public void log_out(View v){
+        Intent intent = new Intent(this, LogInPage.class);
+        startActivity(intent);
     }
 
 
