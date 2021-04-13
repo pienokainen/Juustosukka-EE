@@ -16,4 +16,9 @@
     <string name="height">Pituus</string>
     <string name="log_out">Kirjaudu Ulos</string>
     <string name="profilepic"></string>
+    <string name="hint_text1">Syötä kaupunki</string>
+    <string name="button1_text">Etsi</string>
+    <string name="temperatureText">°C</string>
+    <string name="cityText">Kaupunki</string>
+    <string name="weatherStatinText">Sääasema</string>
 </resources>
