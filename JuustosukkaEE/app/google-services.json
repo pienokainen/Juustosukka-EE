@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "135318437030",
+    "project_id": "juustosukkaee",
+    "storage_bucket": "juustosukkaee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135318437030:android:65feeac56ad880d281c867",
+        "android_client_info": {
+          "package_name": "com.example.juustosukka_ee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135318437030-klq5g1350713s8s8iie963heesatavqf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.juustosukka_ee",
+            "certificate_hash": "c676801845357ccf0b1f5a36f1889642d863b771"
+          }
+        },
+        {
+          "client_id": "135318437030-a7jtm91o4ok0skeon4gdo4uhb03fmh6k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeeeHEvV-dxurOBwYPAYl4LgYK6tQxdgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135318437030-a7jtm91o4ok0skeon4gdo4uhb03fmh6k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
