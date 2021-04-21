@@ -37,29 +37,65 @@
         app:menu="@menu/menu_navigation" />
 
     <Button
-        android:id="@+id/plusnappi"
+        android:id="@+id/plussteps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:onClick="Nappi"
+        android:layout_marginTop="52dp"
+        android:onClick="setStepsentry"
         android:text="datanlisays"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plusweight" />
+
+    <Button
+        android:id="@+id/plusweight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setWeightentry"
+        android:text="datanlisays"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:onClick="refresh"
+        android:text="datanlisays"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plussteps" />
 
     <EditText
         android:id="@+id/weight"
         android:layout_width="106dp"
         android:layout_height="46dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Enter weight"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toEndOf="@+id/plusnappi"
+        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintStart_toEndOf="@+id/plusweight"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/steps"
+        android:layout_width="106dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Enter weight"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintStart_toEndOf="@+id/plussteps"
+        app:layout_constraintTop_toBottomOf="@+id/weight" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/weightchart"
