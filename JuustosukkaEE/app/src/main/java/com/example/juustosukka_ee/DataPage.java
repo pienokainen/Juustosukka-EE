@@ -54,6 +54,7 @@ public class DataPage extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
         bottomNavigationView.setSelectedItemId(R.id.data);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -76,14 +77,14 @@ public class DataPage extends AppCompatActivity {
     public void searchWeatherData(View v) {
         try {
             city = cityInput.getText().toString();
-            //Reading Areas XML
+            //Reading XML from Ilmatieteenlaitos
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
 
+            //Fetching and formatting user's time
             String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             String currentTime = new SimpleDateFormat("HH:00:00", Locale.getDefault()).format(new Date());
 
-            Log.d("date", "&starttime=" + currentDate + "T" + currentTime + "Z");
             URL url = new URL("http://opendata.fmi.fi/wfs/fin?service=WFS" +
                     "&version=2.0.0&request=GetFeature" +
                     "&storedquery_id=fmi::observations::weather::timevaluepair" +
@@ -93,6 +94,7 @@ public class DataPage extends AppCompatActivity {
                     "&maxlocations=1&parameters=temperature&");
             InputStream stream = url.openStream();
 
+            // Displaying data on datapage
             Document doc = docBuilder.parse(stream);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getDocumentElement().getElementsByTagName("wfs:member");
