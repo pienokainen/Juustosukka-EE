@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.cloud.datastore.core.number.NumberParts;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +25,7 @@ import static android.content.ContentValues.TAG;
 public class NewUserPage extends AppCompatActivity {
     private ImageButton returnButton;
     Button createAccount;
-    EditText email, passwrd;
+    EditText email, passwrd, password2;
     private FirebaseAuth mAuth;
 
     @Override
@@ -33,6 +34,7 @@ public class NewUserPage extends AppCompatActivity {
         setContentView(R.layout.activity_newuserpage);
         email = findViewById(R.id.username_input);
         passwrd = findViewById(R.id.passwd);
+        password2 = findViewById(R.id.passwd_again);
         mAuth = FirebaseAuth.getInstance();
         returnButton = (ImageButton) findViewById(R.id.returnbutton);
         createAccount = (Button) findViewById(R.id.createAccount);
@@ -40,8 +42,14 @@ public class NewUserPage extends AppCompatActivity {
         {
             @Override
             public void onClick(View v)
-            {
-                createAccount(email.getText().toString(), passwrd.getText().toString());
+            {   System.out.println("Password error1");
+                if (testPassword(passwrd.getText().toString(),password2.getText().toString())) {
+                    createAccount(email.getText().toString(), passwrd.getText().toString());
+                }else{
+                    System.out.println("Password error");
+                    showToast(v, "Salasanassa tulee olla vähintään 12 merkkiä.");
+
+                }
             }
         });
 
@@ -79,9 +87,9 @@ public class NewUserPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showToast (View v) {
+    public void showToast (View v,CharSequence text) {
         Context context = getApplicationContext();
-        CharSequence text = "Käyttäjätili luotu!";
+        //CharSequence text = "Käyttäjätili luotu!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
@@ -91,5 +99,16 @@ public class NewUserPage extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
 
+    }
+    private boolean testPassword(String password, String password_again) {
+        System.out.println("Password errorppppppppppppppppppppppppppppppppppppppp");
+        boolean compliant = false;
+        if (password.length() > 11) {
+            compliant = true;
+        }
+        if (password.equals(password2)){
+            compliant = true;
+        }
+        return compliant;
     }
 }

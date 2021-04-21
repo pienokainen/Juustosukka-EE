@@ -22,8 +22,8 @@
         android:background="#F1EAEA"
         android:backgroundTint="@color/yellow_700"
         android:gravity="center_horizontal|fill_vertical"
+        android:hint="@string/home_town"
         android:inputType="text"
-        android:text="@string/home_town"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp" />
@@ -66,15 +66,15 @@
         android:layout_marginTop="238dp"
         android:layout_marginEnd="24dp"
         android:layout_toEndOf="@+id/start_weight"
+        android:autofillHints=""
         android:background="#F1EAEA"
         android:backgroundTint="@color/yellow_700"
         android:gravity="center|center_horizontal|fill_vertical"
         android:hint="@string/height"
-        android:inputType="number"
+        android:inputType="text"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:autofillHints="" />
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/start_weight"
@@ -84,19 +84,18 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="23dp"
         android:layout_marginTop="240dp"
+        android:autofillHints=""
         android:background="#F1EAEA"
         android:backgroundTint="@color/yellow_700"
         android:gravity="center_horizontal|fill_vertical"
         android:hint="@string/start_weight"
-        android:inputType="number"
-        android:text="@string/start_weight"
+        android:inputType="text"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:autofillHints="" />
+        android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/password_profilepage"
+    <EditText
+        android:id="@+id/age_pp"
         android:layout_width="180dp"
         android:layout_height="77dp"
         android:layout_alignParentStart="true"
@@ -108,7 +107,7 @@
         android:background="#FFFFFF"
         android:backgroundTint="@color/yellow_700"
         android:gravity="center_horizontal|fill_vertical"
-        android:text="@string/password_pp"
+        android:hint="@string/age_hint"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
@@ -146,6 +145,21 @@
         android:background="@color/yellow_700"
         android:onClick="log_out"
         android:text="@string/log_out"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:backgroundTint="@color/teal_700" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="140dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/home_town"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="224dp"
+        android:background="@color/yellow_700"
+        android:onClick="save_info"
+        android:text="@string/save_button"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:backgroundTint="@color/teal_700" />
