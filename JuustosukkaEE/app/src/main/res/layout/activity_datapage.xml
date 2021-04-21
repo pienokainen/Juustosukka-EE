@@ -46,10 +46,12 @@
         android:layout_height="52dp"
         android:onClick="searchWeatherData"
         android:text="@string/button1_text"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="@+id/searchLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/searchLayout"
-        app:layout_constraintTop_toTopOf="@+id/searchLayout" />
+        app:layout_constraintTop_toTopOf="@+id/searchLayout"
+        app:rippleColor="#6E3131" />
 
     <View
         android:id="@+id/divider"
@@ -67,6 +69,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="392dp"
         android:layout_height="98dp"
+        app:cardBackgroundColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/navi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +86,7 @@
                 android:layout_height="57dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/temperatureText"
+                android:textColor="@color/teal_900"
                 android:textSize="30sp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -95,6 +99,7 @@
                 android:layout_height="57dp"
                 android:gravity="center_vertical"
                 android:text="@string/cityText"
+                android:textColor="@color/teal_900"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/temperature"
@@ -107,6 +112,7 @@
                 android:layout_width="234dp"
                 android:layout_height="21dp"
                 android:text="@string/weatherStatinText"
+                android:textColor="@color/teal_700"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/userCity"
                 app:layout_constraintStart_toStartOf="@+id/userCity"
