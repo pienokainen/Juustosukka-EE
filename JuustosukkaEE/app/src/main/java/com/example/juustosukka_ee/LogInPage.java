@@ -55,7 +55,9 @@ public class LogInPage extends AppCompatActivity {
     }
     private void signIn(String email, String password) {
         // [START sign_in_with_email]
-        mAuth.signInWithEmailAndPassword(email, password)
+        String hash = PasswordHash.getPassWordHash(password,email);
+        //System.out.println("#########################"+hash);
+        mAuth.signInWithEmailAndPassword(email, hash)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
