@@ -71,12 +71,8 @@
         android:backgroundTint="@color/yellow_700"
         android:gravity="center|center_horizontal|fill_vertical"
         android:hint="@string/height"
-<<<<<<< HEAD
         android:inputType="number"
         android:onClick="setHeight"
-=======
-        android:inputType="text"
->>>>>>> 47691ba50c57166f9fc0621f7241636d66b1f855
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
