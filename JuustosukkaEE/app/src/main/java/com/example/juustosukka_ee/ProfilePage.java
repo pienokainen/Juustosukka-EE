@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-//>>>>>>> 47691ba50c57166f9fc0621f7241636d66b1f855
 
 import static android.content.ContentValues.TAG;
 
@@ -28,7 +27,6 @@ public class ProfilePage extends AppCompatActivity {
     Button log_out, save;
     private FirebaseAuth mAuth;
 
-//>>>>>>> 47691ba50c57166f9fc0621f7241636d66b1f855
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,21 +69,15 @@ public class ProfilePage extends AppCompatActivity {
 
     }
 
-//<<<<<<< HEAD
-//<<<<<<< HEAD
-    //public void setHeight(View v){
-    //    mDatabase = FirebaseDatabase.getInstance().getReference();
-    //    String userid = mAuth.getCurrentUser().getUid();
-    //    firebaseDatabase = FirebaseDatabase.getInstance();
-    //    reference = firebaseDatabase.getReference("Users");
-    //    reference.child("Pituus").setValue(height.getText().toString());
-//
-    //}
+    public void setHeight(View v){
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
+        //String userid = mAuth.getCurrentUser().getUid();
+        //firebaseDatabase = FirebaseDatabase.getInstance();
+        //reference = firebaseDatabase.getReference("Users");
+        //reference.child("Pituus").setValue(height.getText().toString());
 
-//=======
-//>>>>>>> 47691ba50c57166f9fc0621f7241636d66b1f855
-//=======
-//>>>>>>> 47691ba50c57166f9fc0621f7241636d66b1f855
+    }
+
     public void log_out(View v){
         Intent intent = new Intent(this, LogInPage.class);
         startActivity(intent);
