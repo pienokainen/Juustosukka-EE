@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -53,14 +54,21 @@ public class HomePage extends AppCompatActivity {
     EditText stepsentry;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
     LineChart mpstepschart;
     LineChart mpweightchart;
+    String currentUserID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         setProfile();
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
+        if(mFirebaseUser != null) {
+            currentUserID = mFirebaseUser.getUid();
+        }
         weightentry = findViewById(R.id.weight);
         stepsentry = findViewById(R.id.steps);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
@@ -136,7 +144,10 @@ public class HomePage extends AppCompatActivity {
             private final SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM.", Locale.ENGLISH);
             @Override
             public String getFormattedValue(float value) {
-                return value + "kg";
+
+                double round = value;
+                round = Math.round(round * 100) / 100;
+                return round + "kg";
             }
 
 
@@ -210,6 +221,9 @@ public class HomePage extends AppCompatActivity {
         docData.put("Paino", nestedData);
         db.collection("users").document(userid)
                 .set(docData, SetOptions.merge());
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Users").child(currentUserID).child("paino").setValue(weightI);
 
     }
 

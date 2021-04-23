@@ -166,22 +166,22 @@ public class DataPage extends AppCompatActivity {
             if (bmi <15){
                 bmiresult.setText(String.valueOf(bmi));
                 bmitext.setText("Sairaalloinen alipaino");
-            }else if (15<= bmi|| bmi<17){
+            }else if (15<= bmi && bmi<17){
                 bmiresult.setText(String.valueOf(bmi));
                 bmitext.setText("Merkittävä alipaino");
-            }else if (17<=bmi|| bmi <18.5){
+            }else if (17<=bmi && bmi <18.5){
                 bmiresult.setText(String.valueOf(bmi));
                 bmitext.setText("Normaalia alhaisempi paino");
-            }else if (18.5<=bmi|| bmi <25){
+            }else if (18.5<=bmi && bmi <25){
                 bmiresult.setText(String.valueOf(bmi));
                 bmitext.setText("Normaali paino");
-            }else if (25<=bmi || bmi<30){
+            }else if (25<=bmi && bmi<30){
                 bmiresult.setText(String.valueOf(bmi));
                 bmitext.setText("Lievä ylipaino");
-            }else if (30<=bmi || bmi<35){
+            }else if (30<=bmi && bmi<35){
                 bmiresult.setText(String.valueOf(bmi));
                 bmitext.setText("Merkittävä ylipaino");
-            }else if (35<=bmi|| bmi<40){
+            }else if (35<=bmi && bmi<40){
                 bmiresult.setText(String.valueOf(bmi));
                 bmitext.setText("Vaikea ylipaino");
             }else if (bmi>=40){

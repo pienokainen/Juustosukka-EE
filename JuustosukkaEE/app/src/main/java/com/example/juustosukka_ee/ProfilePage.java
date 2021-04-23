@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +27,8 @@ public class ProfilePage extends AppCompatActivity {
     EditText editText, password,agefield, weight_pp, height_pp,hometown_pp;
     Button log_out, save;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +44,15 @@ public class ProfilePage extends AppCompatActivity {
         weight_pp = findViewById(R.id.start_weight);
         height_pp = findViewById(R.id.height);
         hometown_pp = findViewById(R.id.home_town);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
+        if(mFirebaseUser != null) {
+            currentUserID = mFirebaseUser.getUid();
+        }
         /*EditText editWeight = findViewById(R.id.start_weight);
         EditText editHeight = findViewById(R.id.height);
 
         TextView editWeight = findViewById(R.id.height);*/
-        mAuth = FirebaseAuth.getInstance();
         System.out.println(mAuth.getCurrentUser().getEmail());
         username.setText(mAuth.getCurrentUser().getEmail());
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -69,14 +76,7 @@ public class ProfilePage extends AppCompatActivity {
 
     }
 
-    public void setHeight(View v){
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
-        //String userid = mAuth.getCurrentUser().getUid();
-        //firebaseDatabase = FirebaseDatabase.getInstance();
-        //reference = firebaseDatabase.getReference("Users");
-        //reference.child("Pituus").setValue(height.getText().toString());
 
-    }
 
     public void log_out(View v){
         Intent intent = new Intent(this, LogInPage.class);
@@ -86,6 +86,7 @@ public class ProfilePage extends AppCompatActivity {
         String age = agefield.getText().toString();
         String weight = weight_pp.getText().toString();
         String height = height_pp.getText().toString();
+        setUserHeight(height);
         String hometown = hometown_pp.getText().toString();
         Log.d(TAG, "UserInformationUpdate:success"+ "   AGE: "+age+ "   WEIGHT: "+weight +"   HEIGHT: "+height+ "   HOMETOWN: "+hometown);
 
@@ -93,5 +94,11 @@ public class ProfilePage extends AppCompatActivity {
         Log.d(TAG, "UserInformationUpdate:success"+ "   AGE: "+age+ "   WEIGHT: "+weight +"   HEIGHT: "+height+ "   HOMETOWN: "+hometown);
 
     }
+
+    public void setUserHeight(String height) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Users").child(currentUserID).child("pituus").setValue(height);
+    }
+
 
 }

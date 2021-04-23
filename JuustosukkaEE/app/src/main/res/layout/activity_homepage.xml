@@ -45,7 +45,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="36dp"
         android:background="@color/yellow_700"
-        android:onClick="setWeightentry"
+        android:onClick="setStepsentry"
         android:text="@string/save_steps"
         android:textColor="@color/black"
         android:textSize="18sp"
