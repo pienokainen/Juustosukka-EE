@@ -79,6 +79,7 @@ public class ProfilePage extends AppCompatActivity {
 
 
     public void log_out(View v){
+        mAuth.signOut();
         Intent intent = new Intent(this, LogInPage.class);
         startActivity(intent);
     }

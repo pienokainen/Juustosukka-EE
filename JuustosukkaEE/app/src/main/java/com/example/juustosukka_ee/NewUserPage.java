@@ -52,6 +52,14 @@ public class NewUserPage extends AppCompatActivity {
                 }
             }
         });
+        returnButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                openLoginPage();
+            }
+        });
 
 
 
@@ -71,6 +79,7 @@ public class NewUserPage extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            openLoginPage();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -82,7 +91,7 @@ public class NewUserPage extends AppCompatActivity {
                 });
         // [END create_user_with_email]
     }
-    public void openLoginPage(View v){
+    public void openLoginPage(){
         Intent intent = new Intent(this, LogInPage.class);
         startActivity(intent);
     }

@@ -31,7 +31,6 @@
         android:background="#F5F0E4"
         android:contentDescription="@string/back_icon"
         android:hapticFeedbackEnabled="false"
-        android:onClick="openLoginPage"
         app:layout_constraintBottom_toTopOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
