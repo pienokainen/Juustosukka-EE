@@ -263,43 +263,43 @@ public class HomePage extends AppCompatActivity {
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
         FirebaseFirestore.getInstance().collection("users")
-                .document(userid).get()
-                .addOnCompleteListener(new
-                                               OnCompleteListener<DocumentSnapshot>() {
-                                                   @RequiresApi(api = Build.VERSION_CODES.O)
-                                                   @Override
-                                                   public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                       DocumentSnapshot document = task.getResult();
+            .document(userid).get()
+            .addOnCompleteListener(new
+                OnCompleteListener<DocumentSnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
 
-                                                       Map<String, Object> map = document.getData();
-                                                       for (Map.Entry<String, Object> entry : map.entrySet()) {
-                                                           if (entry.getKey().equals("Askeleet")) {
-                                                               Log.d("TAG", entry.getValue().toString());
-                                                               System.out.println(entry.getValue().toString());
-                                                               List<String> list = new ArrayList<String>();
-                                                               list = Arrays.asList(entry.getValue().toString().split(", "));
+                        Map<String, Object> map = document.getData();
+                        for (Map.Entry<String, Object> entry : map.entrySet()) {
+                            if (entry.getKey().equals("Askeleet")) {
+                                Log.d("TAG", entry.getValue().toString());
+                                System.out.println(entry.getValue().toString());
+                                List<String> list = new ArrayList<String>();
+                                list = Arrays.asList(entry.getValue().toString().split(", "));
 
-                                                               for(String s: list){
-                                                                   if (s.contains("{")){
-                                                                       s = s.replace("{", "");
-                                                                   }
-                                                                   if(s.contains("}")){
-                                                                       s = s.replace("}", "");
-                                                                   }
-                                                                   String string = s;
-                                                                   String[] parts = string.split("=");
-                                                                   //int date = Integer.parseInt(parts[0]);
-                                                                   String date = parts[0];
-                                                                   float weight = Float.parseFloat(parts[1]);
+                                for(String s: list){
+                                    if (s.contains("{")){
+                                        s = s.replace("{", "");
+                                    }
+                                    if(s.contains("}")){
+                                        s = s.replace("}", "");
+                                    }
+                                    String string = s;
+                                    String[] parts = string.split("=");
+                                    //int date = Integer.parseInt(parts[0]);
+                                    String date = parts[0];
+                                    float weight = Float.parseFloat(parts[1]);
 
-                                                                   float date4 = Float.parseFloat(date);
-                                                                   weightlist.getInstance().addsteps(date4,weight);
-                                                               }
-                                                           }
-                                                       }
+                                    float date4 = Float.parseFloat(date);
+                                    weightlist.getInstance().addsteps(date4,weight);
+                                }
+                            }
+                        }
 
-                                                   }
-                                               });
+                    }
+                });
         return weightlist.getInstance().getSteps();
     }
 
