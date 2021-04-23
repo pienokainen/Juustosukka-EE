@@ -22,4 +22,9 @@
     <string name="cityText">Kaupunki</string>
     <string name="weatherStatinText">Sääasema</string>
     <string name="save_button">Tallenna tiedot</string>
+    <string name="save_weight">Tallenna paino</string>
+    <string name="save_steps">Tallenna askeleet</string>
+    <string name="weight_hint">Syötä paino</string>
+    <string name="steps_hint">Syötä askeleet</string>
+    <string name="refresh_chart">Päivitä taulukot</string>
 </resources>

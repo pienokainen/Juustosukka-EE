@@ -66,7 +66,7 @@ public class HomePage extends AppCompatActivity {
         setProfile();
         mAuth = FirebaseAuth.getInstance();
         weightentry = findViewById(R.id.weight);
-        bmitext = findViewById(R.id.bmitextv);
+        //bmitext = findViewById(R.id.bmitextv);
         stepsentry = findViewById(R.id.steps);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
         bottomNavigationView.setSelectedItemId(R.id.home);

@@ -5,25 +5,9 @@
     android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    android:backgroundTint="#FFFFFF"
+    android:background="#2D2F31"
+    android:backgroundTint="@color/background_color"
     tools:context=".HomePage">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Home"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navi"
@@ -36,64 +20,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation" />
 
-    <Button
-        android:id="@+id/plussteps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:onClick="setStepsentry"
-        android:text="datanlisays"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plusweight" />
 
     <Button
         android:id="@+id/plusweight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp"
+        android:background="@color/yellow_700"
         android:onClick="setWeightentry"
-        android:text="datanlisays"
+        android:text="@string/save_weight"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:onClick="refresh"
-        android:text="datanlisays"
+        android:id="@+id/plussteps"
+        android:layout_width="140dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="36dp"
+        android:background="@color/yellow_700"
+        android:onClick="setWeightentry"
+        android:text="@string/save_steps"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plussteps" />
+        app:layout_constraintTop_toBottomOf="@+id/plusweight" />
+
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="140dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="8dp"
+        android:background="@color/yellow_700"
+        android:onClick="refresh"
+        android:text="@string/refresh_chart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintBottom_toTopOf="@+id/weightchart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/weight"
-        android:layout_width="106dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Enter weight"
-        android:inputType="textPersonName"
+        android:layout_width="180dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="@color/yellow_700"
+        android:gravity="center_horizontal|fill_vertical"
+        android:hint="@string/weight_hint"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/plusweight"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <EditText
         android:id="@+id/steps"
-        android:layout_width="106dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="52dp"
-        android:ems="10"
-        android:hint="Enter weight"
-        android:inputType="textPersonName"
+        android:layout_width="180dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="@color/yellow_700"
+        android:gravity="center_horizontal|fill_vertical"
+        android:hint="@string/steps_hint"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/plussteps"
         app:layout_constraintTop_toBottomOf="@+id/weight" />
 
@@ -115,17 +134,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bmitextv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.575"
-        app:layout_constraintStart_toEndOf="@+id/update"
-        app:layout_constraintTop_toBottomOf="@+id/steps" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
