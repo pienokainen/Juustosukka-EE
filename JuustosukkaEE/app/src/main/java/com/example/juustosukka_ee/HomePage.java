@@ -264,7 +264,6 @@ public class HomePage extends AppCompatActivity {
                         for (Map.Entry<String, Object> entry : map.entrySet()) {
                             if (entry.getKey().equals("Askeleet")) {
                                 Log.d("TAG", entry.getValue().toString());
-                                System.out.println(entry.getValue().toString());
                                 List<String> list = new ArrayList<String>();
                                 list = Arrays.asList(entry.getValue().toString().split(", "));
 
@@ -283,6 +282,8 @@ public class HomePage extends AppCompatActivity {
 
                                     float date4 = Float.parseFloat(date);
                                     Lists.getInstance().addsteps(date4,weight);
+                                    Toast.makeText(HomePage.this, "Askeleiden tallennus onnistui",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -317,21 +318,16 @@ public class HomePage extends AppCompatActivity {
                             for (Map.Entry<String, Object> entry : map.entrySet()) {
                                 if (entry.getKey().equals("Paino")) {
                                     Log.d("TAG", entry.getValue().toString());
-                                    System.out.println(entry.getValue().toString());
                                     List<String> list = new ArrayList<String>();
                                     list = Arrays.asList(entry.getValue().toString().split(", "));
 
                                     for (String s : list) {
                                         if (s.contains("{")) {
-                                            System.out.println(s);
                                             s = s.replace("{", "");
-                                            System.out.println(s);
                                         }
                                         if (s.contains("}")) {
-                                            System.out.println(s);
                                             s = s.replace("}", "");
                                         }
-                                        System.out.println(s);
                                         String string = s;
                                         String[] parts = string.split("=");
                                         //int date = Integer.parseInt(parts[0]);
@@ -340,6 +336,8 @@ public class HomePage extends AppCompatActivity {
 
                                         float date4 = Float.parseFloat(date);
                                         Lists.getInstance().addweight(date4, weight);
+                                        Toast.makeText(HomePage.this, "Painon tallennus onnistui",
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }

@@ -12,9 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import static android.content.ContentValues.TAG;
 
 public class ProfilePage extends AppCompatActivity {
-    TextView textField, username;
+    TextView textField, username, aget, heightt, weightt, htownt;
     EditText editText, password,agefield, weight_pp, height_pp,hometown_pp;
     Button log_out, save;
     private FirebaseAuth mAuth;
@@ -39,6 +42,10 @@ public class ProfilePage extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.profile);
         log_out = (Button) findViewById(R.id.logout_button);
         username = findViewById(R.id.username_profilepage);
+        aget = findViewById(R.id.ikatext);
+        heightt = findViewById(R.id.pituustext);
+        weightt = findViewById(R.id.painotext);
+        htownt = findViewById(R.id.kaupunkitext);
         agefield = findViewById(R.id.age_pp);
         save = findViewById(R.id.save_button);
         weight_pp = findViewById(R.id.start_weight);
@@ -73,7 +80,7 @@ public class ProfilePage extends AppCompatActivity {
                 return false;
             }
         });
-
+        setValues();
     }
 
 
@@ -85,21 +92,115 @@ public class ProfilePage extends AppCompatActivity {
     }
     public void save_info(View v){
         String age = agefield.getText().toString();
+        if (age != null){setUserAge(age);
+            aget.setText("Ikä");}
+
         String weight = weight_pp.getText().toString();
+        if (weight != null){setUserWeight(weight);
+            weightt.setText("Paino (kg)");}
+
         String height = height_pp.getText().toString();
-        setUserHeight(height);
+        if (height != null){setUserHeight(height);
+            heightt.setText("Pituus (cm)");}
+
         String hometown = hometown_pp.getText().toString();
+        if (hometown != null){setUserHometown(hometown);
+            htownt.setText("Kotikaupunki");}
+
         Log.d(TAG, "UserInformationUpdate:success"+ "   AGE: "+age+ "   WEIGHT: "+weight +"   HEIGHT: "+height+ "   HOMETOWN: "+hometown);
 
 
         Log.d(TAG, "UserInformationUpdate:success"+ "   AGE: "+age+ "   WEIGHT: "+weight +"   HEIGHT: "+height+ "   HOMETOWN: "+hometown);
 
+    }
+
+    public void setUserAge(String age) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Users").child(currentUserID).child("ika").setValue(age);
+    }
+
+    public void setUserWeight(String weight) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        double weightd = Double.parseDouble(weight);
+        mDatabase.child("Users").child(currentUserID).child("aloituspaino").setValue(weightd);
     }
 
     public void setUserHeight(String height) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Users").child(currentUserID).child("pituus").setValue(height);
+        double heightd = Double.parseDouble(height);
+        mDatabase.child("Users").child(currentUserID).child("pituus").setValue(heightd);
     }
+
+
+    public void setUserHometown(String hometown) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Users").child(currentUserID).child("kotikaupunki").setValue(hometown);
+    }
+
+
+    public void setValues(){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Users").child(currentUserID).child("ika").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    if (task.getResult().getValue() != null ) {
+                        String age = (String.valueOf(task.getResult().getValue()));
+                        agefield.setText(age);
+                        aget.setText("Ikä");
+                    }
+                }
+            }
+        });
+
+        mDatabase.child("Users").child(currentUserID).child("aloituspaino").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    if (task.getResult().getValue() != null ){
+                        String paino = (String.valueOf(task.getResult().getValue()));
+                        weight_pp.setText(paino);
+                        weightt.setText("Paino (kg)");
+                    }
+                }
+            }
+        });
+
+        mDatabase.child("Users").child(currentUserID).child("pituus").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    if (task.getResult().getValue() != null ) {
+                        String pituus = (String.valueOf(task.getResult().getValue()));
+                        height_pp.setText(pituus);
+                        heightt.setText("Pituus (cm)");
+                    }
+                }
+            }
+        });
+        mDatabase.child("Users").child(currentUserID).child("kotikaupunki").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    if (task.getResult().getValue() != null ) {
+                        String kotikaupunki = (String.valueOf(task.getResult().getValue()));
+                        hometown_pp.setText(kotikaupunki);
+                        htownt.setText("Kotikaupunki");
+                    }
+                }
+            }
+        });
+    }
+
+
 
 
 }

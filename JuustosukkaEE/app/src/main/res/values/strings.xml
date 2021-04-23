@@ -12,8 +12,8 @@
     <string name="username_pp">Käyttäjänimi</string>
     <string name="age_hint">Syötä ikä</string>
     <string name="home_town">Syötä asuinpaikka</string>
-    <string name="start_weight">Aloituspaino</string>
-    <string name="height">Pituus</string>
+    <string name="start_weight">Aloituspaino (kg)</string>
+    <string name="height">Pituus (cm)</string>
     <string name="log_out">Kirjaudu Ulos</string>
     <string name="profilepic"></string>
     <string name="hint_text1">Syötä kaupunki</string>
