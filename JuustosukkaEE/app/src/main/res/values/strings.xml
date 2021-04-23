@@ -31,4 +31,7 @@
     <string name="Calculate_BMI">Laske painoindeksi</string>
     <string name="BMI_Result">BMI</string>
     <string name="refresh_chart">Päivitä taulukot</string>
+    <string name="Profile">Profiili</string>
+    <string name="Data">Data</string>
+    <string name="Home">Koti</string>
 </resources>

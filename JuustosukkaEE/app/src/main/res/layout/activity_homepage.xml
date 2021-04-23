@@ -58,8 +58,8 @@
 
     <Button
         android:id="@+id/update"
-        android:layout_width="140dp"
-        android:layout_height="64dp"
+        android:layout_width="280dp"
+        android:layout_height="52dp"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
         android:background="@color/yellow_700"
@@ -70,7 +70,7 @@
         app:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toTopOf="@+id/weightchart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -89,6 +89,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/plusweight"
@@ -111,6 +112,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/plussteps"
@@ -123,6 +125,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/stepschart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.github.mikephil.charting.charts.LineChart

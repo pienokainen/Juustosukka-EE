@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,7 +93,8 @@ public class ProfilePage extends AppCompatActivity {
     }
     public void save_info(View v){
         String age = agefield.getText().toString();
-        if (age != null){setUserAge(age);
+        if (age != null){
+            setUserAge(age);
             aget.setText("Ikä");}
 
         String weight = weight_pp.getText().toString();
@@ -100,8 +102,10 @@ public class ProfilePage extends AppCompatActivity {
             weightt.setText("Paino (kg)");}
 
         String height = height_pp.getText().toString();
-        if (height != null){setUserHeight(height);
-            heightt.setText("Pituus (cm)");}
+        if (height != null){
+            setUserHeight(height);
+            heightt.setText("Pituus (cm)");
+        }
 
         String hometown = hometown_pp.getText().toString();
         if (hometown != null){setUserHometown(hometown);

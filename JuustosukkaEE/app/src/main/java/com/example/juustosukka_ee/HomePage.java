@@ -93,12 +93,10 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-
-
         mpweightchart = findViewById(R.id.weightchart);
         ArrayList<Entry> weightlist = weightData();
         ArrayList<Entry> sortedwlist = Lists.getInstance().sortlist(weightlist);
-        LineDataSet lineDataSet1 = new LineDataSet(sortedwlist, "Weight");
+        LineDataSet lineDataSet1 = new LineDataSet(sortedwlist, "Paino");
         ArrayList<ILineDataSet> weightdata = new ArrayList<>();
         weightdata.add(lineDataSet1);
         LineData data1 = new LineData(weightdata);
@@ -107,8 +105,6 @@ public class HomePage extends AppCompatActivity {
         mpweightchart.setDrawBorders(true);
         mpweightchart.setBorderColor(Color.BLACK);
         mpweightchart.setBorderWidth(1);
-
-        //mpweightchart.setBackgroundColor(Color.CYAN);
         XAxis xAxis1 = mpweightchart.getXAxis();
         YAxis yAxisr1 = mpweightchart.getAxisRight();
         YAxis yAxisl1 = mpweightchart.getAxisLeft();
@@ -116,7 +112,7 @@ public class HomePage extends AppCompatActivity {
         mpstepschart = findViewById(R.id.stepschart);
         ArrayList<Entry> stepslist = stepsData();
         ArrayList<Entry> sortedslist = Lists.getInstance().sortlist(stepslist);
-        LineDataSet lineDataSet2 = new LineDataSet(sortedslist, "Steps");
+        LineDataSet lineDataSet2 = new LineDataSet(sortedslist, "Askeleet");
         ArrayList<ILineDataSet> stepsdata = new ArrayList<>();
         stepsdata.add(lineDataSet2);
         LineData data2 = new LineData(stepsdata);
@@ -125,8 +121,10 @@ public class HomePage extends AppCompatActivity {
         mpstepschart.setDrawBorders(true);
         mpstepschart.setBorderColor(Color.BLACK);
         mpstepschart.setBorderWidth(1);
-        //mpstepschart.setBackgroundColor(Color.BLACK);
+
         XAxis xAxis2 = mpstepschart.getXAxis();
+        YAxis yAxisl2 = mpstepschart.getAxisLeft();
+        YAxis yAxisr2 = mpstepschart.getAxisRight();
         xAxis1.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
 
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -145,8 +143,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public String getFormattedValue(float value) {
 
-                double round = value;
-                round = Math.round(round * 100) / 100;
+                double round = (double) Math.round(value * 100) / 100;
                 return round + "kg";
             }
 
@@ -158,10 +155,30 @@ public class HomePage extends AppCompatActivity {
             private final SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM.", Locale.ENGLISH);
             @Override
             public String getFormattedValue(float value) {
-                return value + "kg";
+
+                double round = (double) Math.round(value * 100) / 100;
+                return round + "kg";
             }
 
 
+        });
+
+        yAxisl2.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
+
+            @Override
+            public String getFormattedValue(float value) {
+                String round = String.valueOf((int) value);
+                return round;
+            }
+        });
+
+        yAxisr2.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
+
+            @Override
+            public String getFormattedValue(float value) {
+                String round = String.valueOf((int) value);
+                return round;
+            }
         });
 
         xAxis2.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
@@ -191,6 +208,7 @@ public class HomePage extends AppCompatActivity {
         stepslist.remove(0);
         return stepslist;
     }
+
     private ArrayList<Entry> weightData(){
         ArrayList<Entry> weighlist = new ArrayList<Entry>();
         List<Entry> weightEntry = getWeight();
@@ -205,52 +223,65 @@ public class HomePage extends AppCompatActivity {
         return weighlist;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setWeightentry(View v){
-        LocalDate localDate = LocalDate.now();
-        String date = String.valueOf(localDate.toEpochDay());
-        String userid = mAuth.getCurrentUser().getUid();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        if (weightentry.getText().toString().length() > 0) {
+            LocalDate localDate = LocalDate.now();
+            String date = String.valueOf(localDate.toEpochDay());
+            String userid = mAuth.getCurrentUser().getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Map<String, Object> docData = new HashMap<>();
-        Map<String, Object> nestedData = new HashMap<>();
+            Map<String, Object> docData = new HashMap<>();
+            Map<String, Object> nestedData = new HashMap<>();
 
-        int weightI = Integer.parseInt(weightentry.getText().toString());
-        nestedData.put(date, weightI);
-        docData.put("Paino", nestedData);
-        db.collection("users").document(userid)
-                .set(docData, SetOptions.merge());
+            int weightI = Integer.parseInt(weightentry.getText().toString());
+            nestedData.put(date, weightI);
+            docData.put("Paino", nestedData);
+            db.collection("users").document(userid)
+                    .set(docData, SetOptions.merge());
+            weightentry.getText().clear();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Users").child(currentUserID).child("paino").setValue(weightI);
-
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("Users").child(currentUserID).child("paino").setValue(weightI);
+            Toast.makeText(HomePage.this, "Painon tallennus onnistui",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(HomePage.this, "Syötä ensin paino",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setStepsentry(View v) {
-        LocalDate localDate = LocalDate.now();
-        String date = String.valueOf(localDate.toEpochDay());
-        String userid = mAuth.getCurrentUser().getUid();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> docData2 = new HashMap<>();
-        Map<String, Object> nestedData2 = new HashMap<>();
+        if (stepsentry.getText().toString().length() > 0){
+            LocalDate localDate = LocalDate.now();
+            String date = String.valueOf(localDate.toEpochDay());
+            String userid = mAuth.getCurrentUser().getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            Map<String, Object> docData2 = new HashMap<>();
+            Map<String, Object> nestedData2 = new HashMap<>();
 
-        int stepsI = Integer.parseInt(stepsentry.getText().toString());
-        nestedData2.put(date, stepsI);
-        docData2.put("Askeleet", nestedData2);
+            int stepsI = Integer.parseInt(stepsentry.getText().toString());
+            nestedData2.put(date, stepsI);
+            docData2.put("Askeleet", nestedData2);
 
 
-        db.collection("users").document(userid)
-                .set(docData2, SetOptions.merge());
+            db.collection("users").document(userid)
+                    .set(docData2, SetOptions.merge());
+            stepsentry.getText().clear();
+            Toast.makeText(HomePage.this, "Askeleiden tallennus onnistui",
+                    Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(HomePage.this, "Syötä ensin askeleiden määrä",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
-
 
     private ArrayList<Entry> getSteps(){
 
         String userid = mAuth.getCurrentUser().getUid();
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-
         FirebaseFirestore.getInstance().collection("users")
             .document(userid).get()
             .addOnCompleteListener(new
@@ -282,8 +313,6 @@ public class HomePage extends AppCompatActivity {
 
                                     float date4 = Float.parseFloat(date);
                                     Lists.getInstance().addsteps(date4,weight);
-                                    Toast.makeText(HomePage.this, "Askeleiden tallennus onnistui",
-                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -292,7 +321,6 @@ public class HomePage extends AppCompatActivity {
                 });
         return Lists.getInstance().getSteps();
     }
-
 
     public void refresh(View v){
         Intent intent = new Intent(this, HomePage.class);
@@ -336,8 +364,6 @@ public class HomePage extends AppCompatActivity {
 
                                         float date4 = Float.parseFloat(date);
                                         Lists.getInstance().addweight(date4, weight);
-                                        Toast.makeText(HomePage.this, "Painon tallennus onnistui",
-                                                Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -349,7 +375,6 @@ public class HomePage extends AppCompatActivity {
                 });
         return Lists.getInstance().getPaino();
     }
-
 
     public void setProfile(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -364,10 +389,5 @@ public class HomePage extends AppCompatActivity {
                 .set(docData, SetOptions.merge());
 
     }
-
-
-
-
-
 
 }
