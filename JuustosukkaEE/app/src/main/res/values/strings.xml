@@ -26,5 +26,9 @@
     <string name="save_steps">Tallenna askeleet</string>
     <string name="weight_hint">Syötä paino</string>
     <string name="steps_hint">Syötä askeleet</string>
+    <string name="Enter_height">Syötä pituus (cm)</string>
+    <string name="Enter_weight">Syötä paino (kg)</string>
+    <string name="Calculate_BMI">Laske painoindeksi</string>
+    <string name="BMI_Result">BMI</string>
     <string name="refresh_chart">Päivitä taulukot</string>
 </resources>

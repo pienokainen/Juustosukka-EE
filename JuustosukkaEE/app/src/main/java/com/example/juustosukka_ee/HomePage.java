@@ -49,12 +49,8 @@ import java.util.Objects;
 
 
 public class HomePage extends AppCompatActivity {
-    private DatabaseReference mDatabase;
-    TextView bmitext;
     EditText weightentry;
     EditText stepsentry;
-    FirebaseFirestore db;
-    DocumentReference documentReference;
 
     private FirebaseAuth mAuth;
     LineChart mpstepschart;
@@ -66,7 +62,6 @@ public class HomePage extends AppCompatActivity {
         setProfile();
         mAuth = FirebaseAuth.getInstance();
         weightentry = findViewById(R.id.weight);
-        //bmitext = findViewById(R.id.bmitextv);
         stepsentry = findViewById(R.id.steps);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -359,49 +354,6 @@ public class HomePage extends AppCompatActivity {
     }
 
 
-    private void BMI(View v){
-        if (TextUtils.isEmpty(weightentry.getText().toString())) {
-            Toast.makeText(HomePage.this, "Syötä ensin paino",
-                    Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(HomePage.this,
-                    "Proceed..",
-                    Toast.LENGTH_SHORT).show();
-
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-            String userid = mAuth.getCurrentUser().getUid();
-            mDatabase.child("users").child(userid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                    }
-                    else {
-                        String pituus = (String.valueOf(task.getResult().getValue()));
-
-                        //bmi = (weight/(height*height))
-                        //if (bmi <15){
-                        //    "Sairaalloinen alipaino"
-                        //}else if (15<= bmi <17){
-                        //    "Merkittävä alipaino"
-                        //}else if (17<=bmi <18.5){
-                        //    "Normaalia alhaisempi paino"
-                        //}else if (18.5<=bmi <25){
-                        //    "Normaali paino"
-                        //}else if (25<=bmi <30){
-                        //    "Lievä ylipaino"
-                        //}else if (30<=bmi <35){
-                        //    "Merkittävä ylipaino"
-                        //}else if (35<=bmi <40){
-                        //    "Vaikea ylipaino"
-                        //}else if (bmi>=40){
-                        //    "Sairaalloinen ylipaino"
-                        //}
-                    }
-                }
-            });
-        }
-    }
 
 
 
