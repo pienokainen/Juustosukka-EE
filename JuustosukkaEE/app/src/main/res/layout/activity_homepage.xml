@@ -101,7 +101,7 @@
         android:id="@+id/weightchart"
         android:layout_width="match_parent"
         android:layout_height="146dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/stepschart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -110,7 +110,7 @@
         android:id="@+id/stepschart"
         android:layout_width="match_parent"
         android:layout_height="146dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/navi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

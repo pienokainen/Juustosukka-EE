@@ -1,12 +1,10 @@
 package com.example.juustosukka_ee;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -15,12 +13,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.data.model.User;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -28,49 +24,28 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.EntryXComparator;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
-import static android.content.ContentValues.TAG;
-import static androidx.browser.browseractions.BrowserActionsIntent.KEY_TITLE;
-import static androidx.browser.customtabs.CustomTabsIntent.KEY_DESCRIPTION;
 
 
 public class HomePage extends AppCompatActivity {
@@ -118,7 +93,9 @@ public class HomePage extends AppCompatActivity {
 
 
         mpweightchart = findViewById(R.id.weightchart);
-        LineDataSet lineDataSet1 = new LineDataSet(weightData(), "Weight");
+        ArrayList<Entry> weightlist = weightData();
+        ArrayList<Entry> sortedwlist = Lists.getInstance().sortlist(weightlist);
+        LineDataSet lineDataSet1 = new LineDataSet(sortedwlist, "Weight");
         ArrayList<ILineDataSet> weightdata = new ArrayList<>();
         weightdata.add(lineDataSet1);
         LineData data1 = new LineData(weightdata);
@@ -134,7 +111,9 @@ public class HomePage extends AppCompatActivity {
         YAxis yAxisl1 = mpweightchart.getAxisLeft();
 
         mpstepschart = findViewById(R.id.stepschart);
-        LineDataSet lineDataSet2 = new LineDataSet(stepsData(), "Steps");
+        ArrayList<Entry> stepslist = stepsData();
+        ArrayList<Entry> sortedslist = Lists.getInstance().sortlist(stepslist);
+        LineDataSet lineDataSet2 = new LineDataSet(sortedslist, "Steps");
         ArrayList<ILineDataSet> stepsdata = new ArrayList<>();
         stepsdata.add(lineDataSet2);
         LineData data2 = new LineData(stepsdata);
@@ -190,6 +169,7 @@ public class HomePage extends AppCompatActivity {
 
 
         });
+        Lists.getInstance().empty();
     }
 
     private ArrayList<Entry> stepsData(){
@@ -209,7 +189,7 @@ public class HomePage extends AppCompatActivity {
         ArrayList<Entry> weighlist = new ArrayList<Entry>();
         List<Entry> weightEntry = getWeight();
         weighlist.add(new Entry(0,0));
-        for (Entry c : weightlist.getInstance().getPaino()){
+        for (Entry c : Lists.getInstance().getPaino()){
             float x = c.getX();
             float y = c.getY();
 
@@ -293,14 +273,14 @@ public class HomePage extends AppCompatActivity {
                                     float weight = Float.parseFloat(parts[1]);
 
                                     float date4 = Float.parseFloat(date);
-                                    weightlist.getInstance().addsteps(date4,weight);
+                                    Lists.getInstance().addsteps(date4,weight);
                                 }
                             }
                         }
 
                     }
                 });
-        return weightlist.getInstance().getSteps();
+        return Lists.getInstance().getSteps();
     }
 
 
@@ -350,8 +330,7 @@ public class HomePage extends AppCompatActivity {
                                         float weight = Float.parseFloat(parts[1]);
 
                                         float date4 = Float.parseFloat(date);
-                                        System.out.println("Oi onnen " + date + " ja " + weight + " päivää" + date4);
-                                        weightlist.getInstance().add(date4, weight);
+                                        Lists.getInstance().addweight(date4, weight);
                                     }
                                 }
                             }
@@ -361,8 +340,9 @@ public class HomePage extends AppCompatActivity {
 
                     }
                 });
-        return weightlist.getInstance().getPaino();
+        return Lists.getInstance().getPaino();
     }
+
 
     public void setProfile(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
