@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -20,7 +21,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.data.Entry;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -50,6 +50,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -99,7 +100,7 @@ public class DataPage extends AppCompatActivity {
         heightentry = findViewById(R.id.bmiheight);
         setEntries();
         recyclerList();
-        recyclerList = Lists.getInstance().RE();
+        recyclerList = RecyclerListClass.getInstance().GetSortedRList();
         //Lists.getInstance().sort(recyclerList);
         //recyclerList = Lists.getInstance().getSortedlist();
         recyclerAdapter = new RecyclerAdapter(recyclerList);
@@ -229,32 +230,34 @@ public class DataPage extends AppCompatActivity {
     public void setEntries(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Users").child(currentUserID).child("pituus").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
-                    String pituus = (String.valueOf(task.getResult().getValue()));
-                    if (pituus.isEmpty()){
-                        heightentry.setText("");
-                    } else {
+                    String pituus = (String.valueOf(Objects.requireNonNull(task.getResult()).getValue()));
+                    if (pituus.matches("[0-9]+") && pituus.length() > 0){
                         heightentry.setText(pituus+"cm");
+                    } else {
+                        heightentry.setText("");
                     }
                 }
             }
         });
 
         mDatabase.child("Users").child(currentUserID).child("paino").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
-                    String paino = (String.valueOf(task.getResult().getValue()));
-                    if (paino.isEmpty()){
-                        weightentry.setText("");
-                    } else {
+                    String paino = (String.valueOf(Objects.requireNonNull(task.getResult()).getValue()));
+                    if (paino.matches("[0-9]+") && paino.length() > 0){
                         weightentry.setText(paino+"kg");
+                    } else {
+                        weightentry.setText("");
                     }
                 }
             }
@@ -295,7 +298,7 @@ public class DataPage extends AppCompatActivity {
                                         //int date = Integer.parseInt(parts[0]);
                                         String date = parts[0];
                                         String weight = parts[1];
-                                        Lists.getInstance().RecyclerList(date, weight, "weight");
+                                        RecyclerListClass.getInstance().RecyclerList(date, weight, "weight");
                                     }
                                 }
                                 if (entry.getKey().equals("Askeleet")) {
@@ -315,7 +318,7 @@ public class DataPage extends AppCompatActivity {
                                         String date = parts[0];
                                         String steps = parts[1];
 
-                                        Lists.getInstance().RecyclerList(date, steps, "steps");
+                                        RecyclerListClass.getInstance().RecyclerList(date, steps, "steps");
                                     }
                                 }
                             }

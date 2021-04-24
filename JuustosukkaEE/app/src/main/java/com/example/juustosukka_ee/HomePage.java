@@ -251,7 +251,7 @@ public class HomePage extends AppCompatActivity {
             Toast.makeText(HomePage.this, "Syötä ensin paino",
                     Toast.LENGTH_SHORT).show();
         }
-        Lists.getInstance().clearLists();
+        RecyclerListClass.getInstance().clearLists();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -279,7 +279,7 @@ public class HomePage extends AppCompatActivity {
             Toast.makeText(HomePage.this, "Syötä ensin askeleiden määrä",
                     Toast.LENGTH_SHORT).show();
         }
-        Lists.getInstance().clearLists();
+        RecyclerListClass.getInstance().clearLists();
     }
 
     private ArrayList<Entry> getSteps(){

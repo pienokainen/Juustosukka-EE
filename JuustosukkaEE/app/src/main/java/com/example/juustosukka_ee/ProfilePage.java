@@ -88,7 +88,7 @@ public class ProfilePage extends AppCompatActivity {
 
 
     public void log_out(View v){
-        Lists.getInstance().clearLists();
+        RecyclerListClass.getInstance().clearLists();
         Lists.getInstance().empty();
         mAuth.signOut();
         Intent intent = new Intent(this, LogInPage.class);
