@@ -139,7 +139,6 @@ public class HomePage extends AppCompatActivity {
 
         yAxisl1.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
 
-            private final SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM.", Locale.ENGLISH);
             @Override
             public String getFormattedValue(float value) {
 
@@ -152,7 +151,6 @@ public class HomePage extends AppCompatActivity {
 
         yAxisr1.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
 
-            private final SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM.", Locale.ENGLISH);
             @Override
             public String getFormattedValue(float value) {
 

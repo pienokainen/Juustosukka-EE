@@ -1,9 +1,14 @@
 package com.example.juustosukka_ee;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.TextUtils;
@@ -15,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.data.Entry;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Document;
@@ -37,8 +44,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -48,6 +59,11 @@ import javax.xml.parsers.ParserConfigurationException;
 public class DataPage extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
+
+    Context context = null;
+    RecyclerView recyclerView;
+    RecyclerAdapter recyclerAdapter;
+
     EditText weightentry, heightentry;
     FirebaseFirestore db;
     DocumentReference documentReference;
@@ -56,7 +72,9 @@ public class DataPage extends AppCompatActivity {
     TextView temperatureView, userCityView, weatherStationView, bmitext, bmiresult;
     Button searchCity;
     String city, currentUserID;
+    List<ListInfo> recyclerList;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +82,12 @@ public class DataPage extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         mAuth = FirebaseAuth.getInstance();
+        context = DataPage.this;
         FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
         if(mFirebaseUser != null) {
             currentUserID = mFirebaseUser.getUid();
         }
+        recyclerView = findViewById(R.id.recyclerView);
         cityInput = findViewById(R.id.cityInput);
         searchCity = findViewById(R.id.searchCity);
         temperatureView = findViewById(R.id.temperature);
@@ -78,6 +98,14 @@ public class DataPage extends AppCompatActivity {
         weightentry = findViewById(R.id.bmiweight);
         heightentry = findViewById(R.id.bmiheight);
         setEntries();
+        recyclerList();
+        recyclerList = Lists.getInstance().RE();
+        //Lists.getInstance().sort(recyclerList);
+        //recyclerList = Lists.getInstance().getSortedlist();
+        recyclerAdapter = new RecyclerAdapter(recyclerList);
+        recyclerView.setAdapter(recyclerAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
         bottomNavigationView.setSelectedItemId(R.id.data);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -145,6 +173,11 @@ public class DataPage extends AppCompatActivity {
         } catch(NullPointerException e) {
             e.printStackTrace();
         }
+    }
+
+    public void refresh(View v){
+        Intent intent = new Intent(this, DataPage.class);
+        startActivity(intent);
     }
 
     public void CalculateBMI(View v) {
@@ -220,7 +253,71 @@ public class DataPage extends AppCompatActivity {
         });
     }
 
+    private void recyclerList(){
 
+        String userid = mAuth.getCurrentUser().getUid();
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+
+        FirebaseFirestore.getInstance().collection("users")
+            .document(userid).get()
+            .addOnCompleteListener(new
+                OnCompleteListener<DocumentSnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+
+                        Map<String, Object> map = document.getData();
+                        try{
+                            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                if (entry.getKey().equals("Paino")) {
+                                    Log.d("TAG", entry.getValue().toString());
+                                    List<String> list1 = new ArrayList<String>();
+                                    list1 = Arrays.asList(entry.getValue().toString().split(", "));
+
+                                    for (String s : list1) {
+                                        if (s.contains("{")) {
+                                            s = s.replace("{", "");
+                                        }
+                                        if (s.contains("}")) {
+                                            s = s.replace("}", "");
+                                        }
+                                        String string = s;
+                                        String[] parts = string.split("=");
+                                        //int date = Integer.parseInt(parts[0]);
+                                        String date = parts[0];
+                                        String weight = parts[1];
+                                        Lists.getInstance().RecyclerList(date, weight, "weight");
+                                    }
+                                }
+                                if (entry.getKey().equals("Askeleet")) {
+                                    Log.d("TAG", entry.getValue().toString());
+                                    List<String> list2;
+                                    list2 = Arrays.asList(entry.getValue().toString().split(", "));
+                                    for (String s : list2) {
+                                        if (s.contains("{")) {
+                                            s = s.replace("{", "");
+                                        }
+                                        if (s.contains("}")) {
+                                            s = s.replace("}", "");
+                                        }
+                                        String string = s;
+                                        String[] parts = string.split("=");
+                                        //int date = Integer.parseInt(parts[0]);
+                                        String date = parts[0];
+                                        String steps = parts[1];
+
+                                        Lists.getInstance().RecyclerList(date, steps, "steps");
+                                    }
+                                }
+                            }
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+    }
 
 
 }
