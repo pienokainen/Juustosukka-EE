@@ -97,6 +97,8 @@ public class HomePage extends AppCompatActivity {
         ArrayList<Entry> weightlist = weightData();
         ArrayList<Entry> sortedwlist = Lists.getInstance().sortlist(weightlist);
         LineDataSet lineDataSet1 = new LineDataSet(sortedwlist, "Paino");
+        lineDataSet1.setColor(Color.BLACK);
+        lineDataSet1.setCircleColor(Color.BLACK);
         ArrayList<ILineDataSet> weightdata = new ArrayList<>();
         weightdata.add(lineDataSet1);
         LineData data1 = new LineData(weightdata);
@@ -113,6 +115,8 @@ public class HomePage extends AppCompatActivity {
         ArrayList<Entry> stepslist = stepsData();
         ArrayList<Entry> sortedslist = Lists.getInstance().sortlist(stepslist);
         LineDataSet lineDataSet2 = new LineDataSet(sortedslist, "Askeleet");
+        lineDataSet2.setColor(Color.BLACK);
+        lineDataSet2.setCircleColor(Color.BLACK);
         ArrayList<ILineDataSet> stepsdata = new ArrayList<>();
         stepsdata.add(lineDataSet2);
         LineData data2 = new LineData(stepsdata);
@@ -247,6 +251,7 @@ public class HomePage extends AppCompatActivity {
             Toast.makeText(HomePage.this, "Syötä ensin paino",
                     Toast.LENGTH_SHORT).show();
         }
+        Lists.getInstance().clearLists();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -274,6 +279,7 @@ public class HomePage extends AppCompatActivity {
             Toast.makeText(HomePage.this, "Syötä ensin askeleiden määrä",
                     Toast.LENGTH_SHORT).show();
         }
+        Lists.getInstance().clearLists();
     }
 
     private ArrayList<Entry> getSteps(){

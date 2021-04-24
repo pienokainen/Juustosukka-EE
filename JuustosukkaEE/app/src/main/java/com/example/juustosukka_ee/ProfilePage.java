@@ -2,6 +2,7 @@ package com.example.juustosukka_ee;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,34 +89,37 @@ public class ProfilePage extends AppCompatActivity {
 
     public void log_out(View v){
         Lists.getInstance().clearLists();
+        Lists.getInstance().empty();
         mAuth.signOut();
         Intent intent = new Intent(this, LogInPage.class);
         startActivity(intent);
     }
     public void save_info(View v){
         String age = agefield.getText().toString();
-        if (age != null){
+        if (!TextUtils.isEmpty(agefield.getText().toString())){
             setUserAge(age);
             aget.setText("Ikä");}
 
         String weight = weight_pp.getText().toString();
-        if (weight != null){setUserWeight(weight);
+        if (!TextUtils.isEmpty(weight_pp.getText().toString())){setUserWeight(weight);
             weightt.setText("Paino (kg)");}
 
         String height = height_pp.getText().toString();
-        if (height != null){
+        if (!TextUtils.isEmpty(height_pp.getText().toString())){
             setUserHeight(height);
             heightt.setText("Pituus (cm)");
         }
 
         String hometown = hometown_pp.getText().toString();
-        if (hometown != null){setUserHometown(hometown);
+        if (!TextUtils.isEmpty(hometown_pp.getText().toString())){setUserHometown(hometown);
             htownt.setText("Kotikaupunki");}
 
         Log.d(TAG, "UserInformationUpdate:success"+ "   AGE: "+age+ "   WEIGHT: "+weight +"   HEIGHT: "+height+ "   HOMETOWN: "+hometown);
 
 
         Log.d(TAG, "UserInformationUpdate:success"+ "   AGE: "+age+ "   WEIGHT: "+weight +"   HEIGHT: "+height+ "   HOMETOWN: "+hometown);
+        Toast.makeText(ProfilePage.this, "Tietojen tallennus onnistui",
+                Toast.LENGTH_SHORT).show();
 
     }
 

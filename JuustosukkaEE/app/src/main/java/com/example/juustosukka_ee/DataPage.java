@@ -235,7 +235,11 @@ public class DataPage extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
                     String pituus = (String.valueOf(task.getResult().getValue()));
-                    heightentry.setText(pituus+"cm");
+                    if (pituus.isEmpty()){
+                        heightentry.setText("");
+                    } else {
+                        heightentry.setText(pituus+"cm");
+                    }
                 }
             }
         });
@@ -247,7 +251,11 @@ public class DataPage extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
                     String paino = (String.valueOf(task.getResult().getValue()));
-                    weightentry.setText(paino+"kg");
+                    if (paino.isEmpty()){
+                        weightentry.setText("");
+                    } else {
+                        weightentry.setText(paino+"kg");
+                    }
                 }
             }
         });
