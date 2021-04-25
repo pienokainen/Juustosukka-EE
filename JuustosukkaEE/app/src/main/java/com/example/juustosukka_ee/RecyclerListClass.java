@@ -27,13 +27,6 @@ public class RecyclerListClass {
 
     }
 
-    public ArrayList<ListInfo> getRlist() {
-        return recyclerviewlist;
-    }
-
-    public ArrayList<ListInfo> getSortedlist() {
-        return sortedlist;
-    }
 
     public void RecyclerList(String date, String variable, String identifier){
         Date = date;

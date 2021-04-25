@@ -66,8 +66,6 @@ public class DataPage extends AppCompatActivity {
     RecyclerAdapter recyclerAdapter;
 
     EditText weightentry, heightentry;
-    FirebaseFirestore db;
-    DocumentReference documentReference;
     FirebaseAuth mAuth;
     TextInputEditText cityInput;
     TextView temperatureView, userCityView, weatherStationView, bmitext, bmiresult;
@@ -101,8 +99,6 @@ public class DataPage extends AppCompatActivity {
         setEntries();
         recyclerList();
         recyclerList = RecyclerListClass.getInstance().GetSortedRList();
-        //Lists.getInstance().sort(recyclerList);
-        //recyclerList = Lists.getInstance().getSortedlist();
         recyclerAdapter = new RecyclerAdapter(recyclerList);
         recyclerView.setAdapter(recyclerAdapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -295,7 +291,6 @@ public class DataPage extends AppCompatActivity {
                                         }
                                         String string = s;
                                         String[] parts = string.split("=");
-                                        //int date = Integer.parseInt(parts[0]);
                                         String date = parts[0];
                                         String weight = parts[1];
                                         RecyclerListClass.getInstance().RecyclerList(date, weight, "weight");
@@ -314,7 +309,6 @@ public class DataPage extends AppCompatActivity {
                                         }
                                         String string = s;
                                         String[] parts = string.split("=");
-                                        //int date = Integer.parseInt(parts[0]);
                                         String date = parts[0];
                                         String steps = parts[1];
 

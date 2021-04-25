@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,8 +48,6 @@ public class NewUserPage extends AppCompatActivity {
                     createAccount(email.getText().toString(), passwrd.getText().toString());
                 }else{
                     System.out.println("Password error");
-                    showToast(v, "Salasanassa tulee olla vähintään 12 merkkiä.");
-
                 }
             }
         });
@@ -85,8 +84,8 @@ public class NewUserPage extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            //Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                                    //Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewUserPage.this, "Käyttäjän luominen epäonnistui.",
+                                    Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
                     }
@@ -112,14 +111,17 @@ public class NewUserPage extends AppCompatActivity {
 
     }
     private boolean testPassword(String password, String password_again) {
-        System.out.println("Password errorppppppppppppppppppppppppppppppppppppppp");
-        boolean compliant = false;
-        if (password.length() > 11) {
-            compliant = true;
+        System.out.println("Password error");
+        if (password.length() < 12){
+            Toast.makeText(NewUserPage.this, "Salasanassa tulee olla vähintään 12 merkkiä.",
+                    Toast.LENGTH_SHORT).show();
+            return false;
         }
-        if (password.equals(password2)){
-            compliant = true;
+        if (!password.equals(password_again)){
+            Toast.makeText(NewUserPage.this, "Salasanat eivät täsmää.",
+                    Toast.LENGTH_SHORT).show();
+            return false;
         }
-        return compliant;
+        return true;
     }
 }

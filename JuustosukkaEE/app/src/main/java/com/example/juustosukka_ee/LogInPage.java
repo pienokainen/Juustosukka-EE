@@ -56,7 +56,6 @@ public class LogInPage extends AppCompatActivity {
     private void signIn(String email, String password) {
         // [START sign_in_with_email]
         String hash = PasswordHash.getPassWordHash(password,email);
-        //System.out.println("#########################"+hash);
         mAuth.signInWithEmailAndPassword(email, hash)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -84,10 +83,6 @@ public class LogInPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void homepagelle(View v){
-        Intent intent = new Intent(this, HomePage.class);
-        startActivity(intent);
-    }
     public void openNewUser(View v){
         Intent intent = new Intent(this, NewUserPage.class);
         startActivity(intent);

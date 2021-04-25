@@ -17,7 +17,6 @@ public class Lists {
 
     private static ArrayList<Entry> weight = new ArrayList<Entry>();
     private static ArrayList<Entry> steps = new ArrayList<Entry>();
-    String Date, weightR, heightR;
     private static Lists Listat = new Lists();
 
     public static Lists getInstance(){

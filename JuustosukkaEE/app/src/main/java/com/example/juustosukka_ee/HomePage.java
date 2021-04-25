@@ -202,8 +202,6 @@ public class HomePage extends AppCompatActivity {
         List<Entry> stepsEntry = getSteps();
         stepslist.add(new Entry(0,0));
         for (Entry c : stepsEntry){
-            float x = c.getX();
-            float y = c.getY();
 
             stepslist.add(c);
         }
@@ -216,8 +214,6 @@ public class HomePage extends AppCompatActivity {
         List<Entry> weightEntry = getWeight();
         weighlist.add(new Entry(0,0));
         for (Entry c : Lists.getInstance().getPaino()){
-            float x = c.getX();
-            float y = c.getY();
 
             weighlist.add(c);
         }
@@ -311,7 +307,6 @@ public class HomePage extends AppCompatActivity {
                                     }
                                     String string = s;
                                     String[] parts = string.split("=");
-                                    //int date = Integer.parseInt(parts[0]);
                                     String date = parts[0];
                                     float weight = Float.parseFloat(parts[1]);
 
@@ -362,7 +357,6 @@ public class HomePage extends AppCompatActivity {
                                         }
                                         String string = s;
                                         String[] parts = string.split("=");
-                                        //int date = Integer.parseInt(parts[0]);
                                         String date = parts[0];
                                         float weight = Float.parseFloat(parts[1]);
 
@@ -383,7 +377,6 @@ public class HomePage extends AppCompatActivity {
     public void setProfile(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String userid = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        System.out.println(userid);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> docData = new HashMap<>();
         Map<String, Object> nestedData = new HashMap<>();

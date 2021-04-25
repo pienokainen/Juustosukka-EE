@@ -28,8 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import static android.content.ContentValues.TAG;
 
 public class ProfilePage extends AppCompatActivity {
-    TextView textField, username, aget, heightt, weightt, htownt;
-    EditText editText, password,agefield, weight_pp, height_pp,hometown_pp;
+    TextView username, aget, heightt, weightt, htownt;
+    EditText agefield, weight_pp, height_pp,hometown_pp;
     Button log_out, save;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -58,11 +58,7 @@ public class ProfilePage extends AppCompatActivity {
         if(mFirebaseUser != null) {
             currentUserID = mFirebaseUser.getUid();
         }
-        /*EditText editWeight = findViewById(R.id.start_weight);
-        EditText editHeight = findViewById(R.id.height);
 
-        TextView editWeight = findViewById(R.id.height);*/
-        System.out.println(mAuth.getCurrentUser().getEmail());
         username.setText(mAuth.getCurrentUser().getEmail());
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
