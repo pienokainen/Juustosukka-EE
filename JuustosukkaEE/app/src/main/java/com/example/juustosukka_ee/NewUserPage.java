@@ -97,20 +97,36 @@ public class NewUserPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showToast (View v,CharSequence text) {
-        Context context = getApplicationContext();
-        //CharSequence text = "Käyttäjätili luotu!";
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
     private void reload() { }
 
     private void updateUI(FirebaseUser user) {
 
     }
+    //Kirjautumisen 	salasana noudattaa hyvän salasanan sääntöjä (sisältää vähintään yhden numeron, erikoismerkin, ison ja pienen kirjaimen, on vähintään 12 merkkiä pitkä)
     private boolean testPassword(String password, String password_again) {
+        System.out.println("Password error");
+        if (!password.matches(".*\\d.*")){
+            Toast.makeText(NewUserPage.this, "Salasana tulee sisältää vähintään yhden numeron.",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!containsUpperCaseLetter(password)){
+            Toast.makeText(NewUserPage.this, "Salasana tulee sisältää vähintään yhden ison kirjaimen.",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!containsLowerCaseLetter(password)){
+            Toast.makeText(NewUserPage.this, "Salasana tulee sisältää vähintään yhden pienen kirjaimen.",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!special(password)){
+            Toast.makeText(NewUserPage.this, "Salasana tulee sisältää vähintään yhden erikoismerkin.",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
         System.out.println("Password error");
         if (password.length() < 12){
             Toast.makeText(NewUserPage.this, "Salasanassa tulee olla vähintään 12 merkkiä.",
@@ -123,5 +139,34 @@ public class NewUserPage extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public boolean containsUpperCaseLetter(String s){
+        for(int i=0;i<s.length();i++){
+            if(Character.isUpperCase(s.charAt(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsLowerCaseLetter(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isLowerCase(s.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean special(String s){
+        String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            if(specialChars.contains(Character.toString(c))){
+                return true;
+            }
+        }
+        return false;
     }
 }
